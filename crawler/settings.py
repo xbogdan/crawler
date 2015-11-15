@@ -37,6 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'parsers'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -76,8 +77,11 @@ WSGI_APPLICATION = 'crawler.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'crawler',
+        'USER': 'crawler',
+        'PASSWORD': 'crawler',
+        'HOST': 'localhost'
     }
 }
 
@@ -100,3 +104,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+
+BROKER_URL = 'redis://localhost:6379/0'
+
+CELERY_ALWAYS_EAGER = True
+
+REQUEST_UA = "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) " \
+             "Chrome/39.0.2171.71 Safari/537.36"
